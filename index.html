@@ -11,9 +11,6 @@
     <link href="https://fonts.googleapis.com/css2?family=Yesteryear&display=swap" rel="stylesheet">
 
     <style>
-        body {
-            background-color:bisque;
-        }
         h1 {
             font-family: 'Yesteryear', cursive;
             text-align: center;
@@ -56,12 +53,25 @@
                 title: 'Kalamata Olives',
                 description: '<a href="https://en.wikipedia.org/wiki/Kalamata_olive" target="_blank"><img src="kalamata-olives.jpg" /></a>'
             };
+
+            //Cold Cut Stremenos
+            var coldcut = new Microsoft.Maps.Location(38.747823, 21.639582);
+            var pin_coldcut = new Microsoft.Maps.Pushpin(coldcut, {
+                title: 'Cold Cut Products',
+                text: '2'
+            });
+            pin_coldcut.metadata = {
+                title: 'Cold Cut Products',
+                description: '<a href="https://www.stremenos.com/en" target="_blank"><img src="coldcut.jpg" /></a>'
+            };
             
 
             //Add the pushpin to the map
             map.entities.push(pin_kalamata);
+            map.entities.push(pin_coldcut);
 
             Microsoft.Maps.Events.addHandler(pin_kalamata, 'click', pinClicked);
+            Microsoft.Maps.Events.addHandler(pin_coldcut, 'click', pinClicked);
         
         }
 
