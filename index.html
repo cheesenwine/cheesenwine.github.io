@@ -4,9 +4,37 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Cheese N Wine</title>
+
+    <script type='text/javascript'>
+        var map
+
+        function GetMap() {
+            map = new Microsoft.Maps.Map('#myMap', {});
+
+            // Add a right click event to the map
+            Microsoft.Maps.Events.addHandler(map, 'rightclick', function (e) {
+              const x1 = e.location;
+
+              document.getElementById('id_latitude').value = x1.latitude.toFixed(6)
+              document.getElementById('id_longitude').value = x1.longitude.toFixed(6)
+          });
+
+            //Request the user's location
+            navigator.geolocation.getCurrentPosition(function (position) {
+
+
+                //Center the map on the user's location.
+                map.setView({ center: position.coords, zoom: 15 });
+            });
+        }
+        </script>
+        <script type='text/javascript' src='https://www.bing.com/api/maps/mapcontrol?callback=GetMap&key=AtKaux2oKNpLTtOuIb1poYNs1_kIoGAS9s7-QCLybGSuB8gax8zDd8RxjV4UFyu0' async defer></script>
+
 </head>
 <body>
     <h1>Cheese n Wine</h1>
+
+    <div id="myMap" style="position:relative;width:100%;height:600px;"></div>
 </body>
 </html>
