@@ -10,13 +10,16 @@
     href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css">
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Yesteryear&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Codystar&family=Lobster+Two:wght@700&display=swap" rel="stylesheet">
 
     <style>
-        h1 {
-            font-family: 'Yesteryear', cursive;
+        .title {
+            font-family: 'Codystar', cursive;
             text-align: center;
+            color: white;
+            padding-left: 12px;
+            font-size: 1.4em;
         }
         #footer {
             font-size: 0.7em;
@@ -96,16 +99,22 @@
 </head>
 <body>
     <div class="container">
-    <h1>
-        A Greek Journey of Wine & Cheese Tastings
-    </h1>
+        <nav class="navbar bg-primary text-white rounded">
+            <div class="container-fluid ml-3 pl-3 justify-content-center">
+              <span class="navbar-brand mb-0 h1">
+                <p class="title">
+                    A Greek Journey <br>of Wine & Cheese Tastings
+                </p>
+              </span>
+            </div>
+          </nav>
 
-    <div class="mt-4 p-1 bg-primary text-white rounded">
-    <div id="myMap" style="position:relative;width:100%;height:800px;"></div>
-    </div>
-    <div id="footer">
-        &copy; 2022 - ESC/NYC Coding Society
-    </div>
+        <div class="mt-1 p-1 bg-primary text-white rounded">
+        <div id="myMap" style="position:relative;width:100%;height:800px;"></div>
+        </div>
+        <div id="footer">
+            &copy; 2022 - ESC/NYC Coding Society
+        </div>
     </div>
 </body>
 </html>
