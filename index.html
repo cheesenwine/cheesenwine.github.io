@@ -12,20 +12,10 @@
         function GetMap() {
             map = new Microsoft.Maps.Map('#myMap', {});
 
-            // Add a right click event to the map
-            Microsoft.Maps.Events.addHandler(map, 'rightclick', function (e) {
-              const x1 = e.location;
-
-              document.getElementById('id_latitude').value = x1.latitude.toFixed(6)
-              document.getElementById('id_longitude').value = x1.longitude.toFixed(6)
-          });
-
-            //Request the user's location
-            navigator.geolocation.getCurrentPosition(function (position) {
-
-
-                //Center the map on the user's location.
-                map.setView({ center: position.coords, zoom: 15 });
+            map.setView({
+                mapTypeId: Microsoft.Maps.MapTypeId.aerial,
+                center: new Microsoft.Maps.Location(35.027222, -111.0225),
+                zoom: 15
             });
         }
         </script>
