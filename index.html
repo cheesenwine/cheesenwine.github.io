@@ -8,11 +8,15 @@
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Architects+Daughter&family=Source+Serif+Pro&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Yesteryear&display=swap" rel="stylesheet">
 
     <style>
+        body {
+            background-color:bisque;
+        }
         h1 {
-            font-family: 'Architects Daughter', cursive;
+            font-family: 'Yesteryear', cursive;
+            text-align: center;
         }
     </style>
 
@@ -20,20 +24,65 @@
         var map
 
         function GetMap() {
+            var myStyle = {
+                "version": "1.0",
+                "elements": {
+                    "mapElement": {
+                        "labelVisible": false
+                    },
+                    "area": {
+                        "visible": false
+                    },
+                    "transportation": {
+                        "visible": false
+                    },
+                    "countryRegion": {
+                        "borderStrokeColor": "#444444",
+                        "borderOutlineColor": "#00000000",
+                        "fillColor": "#888888",
+                        "visible": true
+                    },
+                    "adminDistrict": {
+                        "borderVisible": false
+                    },
+                    "water": {
+                        "fillColor": "#FFFFFF"
+                    },
+                    "point": {
+                        "visible": false
+                    }
+                }
+            };
             map = new Microsoft.Maps.Map('#myMap', {});
 
             map.setView({
-                mapTypeId: Microsoft.Maps.MapTypeId.aerial,
+                // mapTypeId: Microsoft.Maps.MapTypeId.aerial,
                 center: new Microsoft.Maps.Location(38.597021, 22.319500),
-                zoom: 7
+                zoom: 7,
+                customMapStyle: myStyle
             });
+
+            //Create custom Pushpin
+            var kalamata = new Microsoft.Maps.Location(37.038098, 22.103840);
+            var pin_kalamata = new Microsoft.Maps.Pushpin(kalamata, {
+                title: 'Kalamata Olives',
+                text: '1'
+            });
+
+            //Add the pushpin to the map
+            map.entities.push(pin_kalamata);
+
+            Microsoft.Maps.Events.addHandler(pin_kalamata, 'click', function () { console.log("Kalamata"); });
+        
         }
         </script>
         <script type='text/javascript' src='https://www.bing.com/api/maps/mapcontrol?callback=GetMap&key=AtKaux2oKNpLTtOuIb1poYNs1_kIoGAS9s7-QCLybGSuB8gax8zDd8RxjV4UFyu0' async defer></script>
 
 </head>
 <body>
-    <h1>A Greek Journey of Wine & Cheese Tastings</h1>
+    <h1>
+        A Greek Journey of Wine & Cheese Tastings
+    </h1>
 
     <div id="myMap" style="position:relative;width:100%;height:800px;"></div>
 </body>
