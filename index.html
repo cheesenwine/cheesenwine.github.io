@@ -49,7 +49,31 @@
             //Assign the infobox to a map instance.
             infobox.setMap(map);
 
-            //Create custom Pushpin
+            var pinData = [
+                ['4', 'San Michalis', 37.487451, 24.920686, 'sanmichali.jpg'],
+                ['5', 'Feta Cheese', 38.031070, 22.110580, 'feta.jpg']
+            ]
+            var pins = []
+
+            for(let i = 0; i < pinData.length; i++) {
+                let item = pinData[i];
+                let pos = new Microsoft.Maps.Location(item[2], item[3]);
+                let pin = new Microsoft.Maps.Pushpin(pos, {
+                    title: item[1],
+                    text: item[0],
+                    color: 'blue'
+                });
+                pin.metadata = {
+                    title: item[1],
+                    description: '<a href="https://en.wikipedia.org/wiki/Kalamata_olive" target="_blank">' +
+                        '<img src="' + item[4] + '" /></a>'
+                };
+                map.entities.push(pin);
+                Microsoft.Maps.Events.addHandler(pin, 'click', pinClicked);
+                pins.push(pin);
+            }
+
+            //Kalamata Olives Pushpin
             var kalamata = new Microsoft.Maps.Location(37.038098, 22.103840);
             var pin_kalamata = new Microsoft.Maps.Pushpin(kalamata, {
                 title: 'Kalamata Olives',
@@ -73,14 +97,28 @@
                 title: 'Cold Cut Products',
                 description: '<a href="https://www.stremenos.com/en" target="_blank"><img src="coldcut.jpg" /></a>'
             };
+
+            //Wine Vakakis
+            var vakakis = new Microsoft.Maps.Location(37.790651, 26.701226);
+            var pin_vakakis = new Microsoft.Maps.Pushpin(vakakis, {
+                title: 'White Wine',
+                text: '3',
+                color: 'blue'
+            });
+            pin_vakakis.metadata = {
+                title: 'White Wine',
+                description: '<a href="https://vakakiswines.gr/en/products/pythagorean-theorem/" target="_blank"><img src="vakakis.jpg" /></a>'
+            };
             
 
             //Add the pushpin to the map
             map.entities.push(pin_kalamata);
             map.entities.push(pin_coldcut);
+            map.entities.push(pin_vakakis);
 
             Microsoft.Maps.Events.addHandler(pin_kalamata, 'click', pinClicked);
             Microsoft.Maps.Events.addHandler(pin_coldcut, 'click', pinClicked);
+            Microsoft.Maps.Events.addHandler(pin_vakakis, 'click', pinClicked);
         
         }
 
