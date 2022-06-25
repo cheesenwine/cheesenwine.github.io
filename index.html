@@ -15,7 +15,7 @@
 
     <style>
         .title {
-            font-family: 'Codystar', cursive;
+            font-family: 'Lobster Two', cursive;
             text-align: center;
             color: white;
             padding-left: 12px;
@@ -53,7 +53,9 @@
             var kalamata = new Microsoft.Maps.Location(37.038098, 22.103840);
             var pin_kalamata = new Microsoft.Maps.Pushpin(kalamata, {
                 title: 'Kalamata Olives',
-                text: '1'
+                text: '1',
+                color: 'blue'
+
             });
             pin_kalamata.metadata = {
                 title: 'Kalamata Olives',
@@ -64,7 +66,8 @@
             var coldcut = new Microsoft.Maps.Location(38.747823, 21.639582);
             var pin_coldcut = new Microsoft.Maps.Pushpin(coldcut, {
                 title: 'Cold Cut Products',
-                text: '2'
+                text: '2',
+                color: 'blue'
             });
             pin_coldcut.metadata = {
                 title: 'Cold Cut Products',
@@ -102,8 +105,8 @@
         <nav class="navbar bg-primary text-white rounded">
             <div class="container-fluid ml-3 pl-3 justify-content-center">
               <span class="navbar-brand mb-0 h1">
-                <p class="title">
-                    A Greek Journey <br>of Wine & Cheese Tastings
+                <p class="title text-wrap">
+                    A Greek Journey of Wine & Cheese Tastings
                 </p>
               </span>
             </div>
