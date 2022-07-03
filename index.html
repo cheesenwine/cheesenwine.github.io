@@ -50,25 +50,42 @@
             infobox.setMap(map);
 
             var urls = [
+                'http://www.alea-sa.gr/?page_id=110&lang=en',
+                'https://www.stremenos.com/en',
+                'https://vakakiswines.gr/en/products/pythagorean-theorem/',
             ]
 
             var pinData = [
-                ['4', 'San Michalis', 37.487451, 24.920686, 'sanmichali.jpg'],
-                ['5', 'Feta Cheese', 38.031070, 22.110580, 'feta.jpg'],
-                ['6', 'Metsovone', 39.770180, 21.182590, 'metsovone.jpg'],
-                ['7', 'Ladotyri', 39.210000, 26.280000, 'ladotyri.jpg'],
-                ['8', 'Graviera', 35.514980, 24.023400, 'graviera.jpg'],
-                ['9', 'Krana Sauce', 40.503569, 22.207592, 'krana.jpg'],
-                ['10', 'Pear Sauce', 39.738850, 22.288190, 'pear.jpg'], 
-                ['11', 'Aubergine Salad', 40.315349, 24.005230, 'aubergine.jpg'],
-                ['12', 'Dried Apricots', 40.416875, 23.355126, 'apricots.jpg'],
-                ['13', 'Dried Figs', 38.948355, 23.151876, 'figs.jpg'],
-                ['14', 'Pistachios', 37.744616, 23.432808, 'pistachios.jpg'],
-                ['15', 'Βreadsticks', 40.498577, 21.224865, 'breadsticks.jpg'],
-                ['16', 'Rosemary Toast', 37.597310, 26.189959, 'toast.jpg'],
-                ['17', 'Crackers', 37.927900, 22.926472, 'crackers.jpg'],
-                ['18', 'Rouge Wine', 41.141477, 24.132409, 'rouge.jpg'],
-                ['19', 'Sugar-Cane Plates', 41.124927, 24.915185, 'rouge.jpg'],
+                ['1', 'Kalamata Olives', 37.038098, 22.103840, 'kalamata.jpg', 'http://www.alea-sa.gr/?page_id=110&lang=en'],
+                ['2', 'Cold Cut Products', 38.747823, 21.639582, 'coldcut.jpg', 'https://www.stremenos.com/en'],
+                ['3', 'Rouge Wine', 37.790651, 26.701226, 'vakakis.jpg', 'https://vakakiswines.gr/en/products/pythagorean-pyramid/'],
+                ['4', 'San Michalis', 37.487451, 24.920686, 'sanmichali.jpg', 'https://www.blisspoint.gr/en/product/san-michali-cheese-pdo/'],
+                ['5', 'Feta Cheese', 38.031070, 22.110580, 'feta.jpg', 'https://www.greekgastronomyguide.gr/en/geuseis/ouzomezedes/feta-kalavryton-mezes/'],
+                ['6', 'Goat Cheese', 39.770180, 21.182590, 'metsovisio.jpg', 'https://cheese-wines.gr/en/product/metsovisio-goat-cheese-of-the-tositsa/'],
+                ['7', 'Ladotyri', 39.210000, 26.280000, 'ladotyri.jpg', 'https://www.tasteatlas.com/ladotyri-mytilinis'],
+                ['8', 'Graviera', 35.514980, 24.023400, 'graviera.jpg', 'https://www.tasteatlas.com/graviera-kritis'],
+                
+                ['9', 'Krana Sauce', 40.503569, 22.207592, 'krana.jpg', ''],
+                
+                ['10', 'Pear Sauce', 39.738850, 22.288190, 'pear.jpg', ''], 
+                
+                ['11', 'Aubergine Salad', 40.315349, 24.005230, 'aubergine.jpg', 'https://www.tasteatlas.com/melitzanosalata'],
+                
+                ['12', 'Dried Apricots', 40.416875, 23.355126, 'apricots.jpg', ''],
+                
+                ['13', 'Dried Figs', 38.948355, 23.151876, 'figs.jpg', ''],
+                
+                ['14', 'Pistachios', 37.744616, 23.432808, 'pistachios.jpg', ''],
+                
+                ['15', 'Βreadsticks', 40.498577, 21.224865, 'breadsticks.jpg', ''],
+                
+                ['16', 'Rosemary Toast', 37.597310, 26.189959, 'toast.jpg', ''],
+                
+                ['17', 'Crackers', 37.927900, 22.926472, 'crackers.jpg', ''],
+                
+                ['18', 'White Wine', 39.342335, 21.758949, 'rouge.jpg', ''],
+                
+                ['19', 'Sugar-Cane Plates', 41.124927, 24.915185, 'rouge.jpg', ''],
             ]
             var pins = []
 
@@ -82,51 +99,13 @@
                 });
                 pin.metadata = {
                     title: item[1],
-                    description: '<a href="https://en.wikipedia.org/wiki/Kalamata_olive" target="_blank">' +
+                    description: '<a href="' + item[5] + '" target="_blank">' +
                         '<img src="' + item[4] + '" /></a>'
                 };
                 map.entities.push(pin);
                 Microsoft.Maps.Events.addHandler(pin, 'click', pinClicked);
                 pins.push(pin);
             }
-
-            //Kalamata Olives Pushpin
-            var kalamata = new Microsoft.Maps.Location(37.038098, 22.103840);
-            var pin_kalamata = new Microsoft.Maps.Pushpin(kalamata, {
-                title: 'Kalamata Olives',
-                text: '1',
-                color: 'blue'
-
-            });
-            pin_kalamata.metadata = {
-                title: 'Kalamata Olives',
-                description: '<a href="https://en.wikipedia.org/wiki/Kalamata_olive" target="_blank"><img src="kalamata-olives.jpg" /></a>'
-            };
-
-            //Cold Cut Stremenos
-            var coldcut = new Microsoft.Maps.Location(38.747823, 21.639582);
-            var pin_coldcut = new Microsoft.Maps.Pushpin(coldcut, {
-                title: 'Cold Cut Products',
-                text: '2',
-                color: 'blue'
-            });
-            pin_coldcut.metadata = {
-                title: 'Cold Cut Products',
-                description: '<a href="https://www.stremenos.com/en" target="_blank"><img src="coldcut.jpg" /></a>'
-            };
-
-            //Wine Vakakis
-            var vakakis = new Microsoft.Maps.Location(37.790651, 26.701226);
-            var pin_vakakis = new Microsoft.Maps.Pushpin(vakakis, {
-                title: 'White Wine',
-                text: '3',
-                color: 'blue'
-            });
-            pin_vakakis.metadata = {
-                title: 'White Wine',
-                description: '<a href="https://vakakiswines.gr/en/products/pythagorean-theorem/" target="_blank"><img src="vakakis.jpg" /></a>'
-            };
-            
 
             //Add the pushpin to the map
             map.entities.push(pin_kalamata);
