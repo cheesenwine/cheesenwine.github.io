@@ -42,8 +42,8 @@
             });
 
             infobox = new Microsoft.Maps.Infobox(map.getCenter(), {
-                maxWidth :250, 
-                maxHeight :250,
+                width :400, 
+                height :400,
                 visible: false
             });
             //Assign the infobox to a map instance.
@@ -88,8 +88,8 @@
                 });
                 pin.metadata = {
                     title: item[1],
-                    description: '<a href="' + item[5] + '" target="_blank">' +
-                        '<img src="' + item[4] + '" /></a>'
+                    description: '<div><a href="' + item[5] + '" target="_blank">' +
+                        '<img src="' + item[4] + '" /></a></div>'
                 };
                 map.entities.push(pin);
                 Microsoft.Maps.Events.addHandler(pin, 'click', pinClicked);
@@ -112,10 +112,13 @@
             if (e.target.metadata) {
                 //Set the infobox options with the metadata of the pushpin.
                 infobox.setOptions({
+                    maxWidth :400, 
+                    maxHeight :400,
+                    offset: new Microsoft.Maps.Point(10,0), 
                     location: e.target.getLocation(),
                     title: e.target.metadata.title,
-                    description: e.target.metadata.description,
-                    visible: true
+                    description: e.target.metadata.description, 
+                    visible: true,
                 });
             }
         }
