@@ -84,7 +84,7 @@
         for(let i = 0; i < markers.length; i++) {
             let item = markers[i]
             var marker = new L.Marker([item[4], item[5]]);
-            marker.bindTooltip(item[0], {permanent: true, direction: right});
+            marker.bindTooltip(item[0], {permanent: true, direction: 'right'});
             marker.bindPopup(item[0] + ". " + item[1] + "<br>(" + item[2] + ")<br>" +  
                         "<img src='" + item[3] + ".jpg' height='150px' width='150px'/>").openPopup();
             marker.addTo(map);
