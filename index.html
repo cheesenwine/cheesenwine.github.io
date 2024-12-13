@@ -2,155 +2,96 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cheese N Wine</title>
-
-    <link rel="stylesheet" 
-    href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css">
-
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Sigmar&display=swap" rel="stylesheet">
-<link href="https://fonts.googleapis.com/css2?family=Codystar&family=Lobster+Two:wght@700&display=swap" rel="stylesheet">
-
+    <title>Document</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+     integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
+     crossorigin=""/>
     <style>
-        .title {
-            font-family: 'Sigmar', cursive;
-            /* font-family: 'Lobster Two', cursive; */
-            text-align: center;
-            color: white;
-            padding-left: 12px;
-            font-size: 1.4em;
+        #map { height: 980px; }
+        .xmas_header {
+            background-image: url('xmas-header.jpg');
+            height: 90px;
         }
-        #footer {
-            font-size: 0.7em;
+        .xmas_message {
+            letter-spacing: 3px;
+            text-shadow: 2px 2px 8px #FF0000;
+            color:chocolate;
+            background-color: white;
             text-align: center;
-            padding-top: 12px;
+        }
+        .map {
+            background-color: #e1309e;
+    border: 10px solid chocolate;
+
+    box-shadow: 0 0 0 10px #f3f5f6 inset;
+    box-sizing: border-box;
         }
     </style>
-
-    <script type='text/javascript'>
-        var map
-
-        function GetMap() {
-            
-            map = new Microsoft.Maps.Map('#myMap', {});
-
-            map.setView({
-                // mapTypeId: Microsoft.Maps.MapTypeId.aerial,
-                center: new Microsoft.Maps.Location(38.597021, 22.319500),
-                zoom: 7,
-            });
-
-            infobox = new Microsoft.Maps.Infobox(map.getCenter(), {
-                width :400, 
-                height :400,
-                visible: false
-            });
-            //Assign the infobox to a map instance.
-            infobox.setMap(map);
-
-            var urls = [
-                'http://www.alea-sa.gr/?page_id=110&lang=en',
-                'https://www.stremenos.com/en',
-                'https://vakakiswines.gr/en/products/pythagorean-theorem/',
-            ]
-
-            var pinData = [
-                ['1', 'Kalamata Olives', 37.038098, 22.103840, 'kalamata.jpg', 'http://www.alea-sa.gr/?page_id=110&lang=en'],
-                ['2', 'Cold Cut Products', 38.747823, 21.639582, 'coldcut.jpg', 'https://www.stremenos.com/en'],
-                ['3', 'Rouge Wine', 40.906979, 24.250599, 'vivliachoraroze.jpg', 'https://www.houseofwine.gr/how/ktima-vivlia-hora-roze.html'],
-                ['4', 'San Michalis', 37.487451, 24.920686, 'sanmichali.jpg', 'https://www.blisspoint.gr/en/product/san-michali-cheese-pdo/'],
-                ['5', 'Feta Cheese', 38.031070, 22.110580, 'feta.jpg', 'https://www.greekgastronomyguide.gr/en/geuseis/ouzomezedes/feta-kalavryton-mezes/'],
-                ['6', 'Goat Cheese', 39.770180, 21.182590, 'metsovisio.jpg', 'https://cheese-wines.gr/en/product/metsovisio-goat-cheese-of-the-tositsa/'],
-                ['7', 'Nouboulo Ham', 39.607586, 19.897358, 'noumpoulo.jpg', 'https://comeco.gr/product/noympoylo/'],
-                ['8', 'Graviera', 35.514980, 24.023400, 'graviera.jpg', 'https://www.tasteatlas.com/graviera-kritis'],             
-                ['9', 'Fig Chutney', 41.087698, 23.527592, 'figchutney.jpg', 'https://darnakongefsis.gr/chutney/'],              
-                ['10', 'Tangerine Sauce', 39.738850, 22.288190, 'mantarinia.jpg', 'https://www.visitgreece.gr/experiences/gastronomy/traditional-products/greek-citrus-fruits/'], 
-                ['11', 'Aubergine Salad', 40.315349, 24.005230, 'aubergine.jpg', 'https://www.tasteatlas.com/melitzanosalata'],           
-                ['12', 'Dried Apricots', 40.416875, 23.355126, 'apricots.jpg', 'http://www.sunfruits.gr/en/our-products/apricots/'],        
-                ['13', 'Dried Figs', 38.948355, 23.151876, 'figs.jpg', 'https://greekfigs.gr/en/home/'],    
-                ['14', 'Pistachios', 37.744616, 23.432808, 'pistachios.jpg', 'https://www.greekgastronomyguide.gr/en/item/fistiki-aigina/'],     
-                ['15', 'Βreadsticks', 40.498577, 21.224865, 'breadsticks.jpg', 'https://tsanos.gr/en/proion/breadsticks-with-beetroot-2/'],
-                ['16', 'Rosemary Toast', 37.597310, 26.189959, 'toast.jpg', 'https://ikarianature.com/rosemary-rosmarinus-officinalis/'],                
-                ['17', 'Apricot & Sunseed Crackers', 38.547315, 23.868078, 'crackers.jpg', 'https://www.greekboston.com/herbs-spices/chives/'],                
-                ['18', 'White Wine', 39.113544, 22.308221, 'white.jpg', 'https://evampelosghi.gr/wines-gr/eyampelos-gi-sauvignon-blanc/'],    
-                ['19', 'Sugar-Cane Plates', 41.124927, 24.915185, 'plate.jpg', 'https://tesserabioproducts.gr/en/product/sugarcane-plate-o-23-cm-round/'],
-                ['20', 'Manouri Cheese', 40.024880, 22.242035, 'manouri.jpg', 'https://www.nikzas.gr/%CE%BC%CE%B1%CE%BD%CE%BF%CF%8D%CF%81%CE%B9/'],
-                ['21', 'Buffalo Cheese with Fennel ', 41.308493, 23.243325, 'buffalo.jpg', 'https://ladishop.gr/voyvalisio-tyri-kerkinhs-errwn-ta-kala-voyna-500gr'],
-                ['22', 'Louza Ham', 37.435592, 25.349488, 'louza.jpg', 'https://www.ciboetvino.com/products/copy-of-%CF%80%CE%B1%CF%83%CF%84%CF%81%CE%AC%CE%BC%CE%B9-%CE%B3%CE%B1%CE%BB%CE%BF%CF%80%CE%BF%CF%8D%CE%BB%CE%B1%CF%82'],
-                ['23', 'Smoked Cheese', 40.097415, 21.034965, 'metsovone.jpg', 'https://www.ciboetvino.com/products/%CE%BC%CE%B5%CF%84%CF%83%CE%BF%CE%B2%CF%8C%CE%BD%CE%B5-%CF%80%CE%BF%CF%80'],
-                ['24', 'Kefalotyri', 38.195536, 20.579851, 'kefalotiri.jpg', 'https://kefaloniancheese.gr/product/kefalotyri/'],
-            ]
-            var pins = []
-
-            for(let i = 0; i < pinData.length; i++) {
-                let item = pinData[i];
-                let pos = new Microsoft.Maps.Location(item[2], item[3]);
-                let pin = new Microsoft.Maps.Pushpin(pos, {
-                    title: item[1],
-                    text: item[0],
-                    color: 'blue'
-                });
-                pin.metadata = {
-                    title: item[1],
-                    description: '<div><a href="' + item[5] + '" target="_blank">' +
-                        '<img src="' + item[4] + '" /></a></div>'
-                };
-                map.entities.push(pin);
-                Microsoft.Maps.Events.addHandler(pin, 'click', pinClicked);
-                pins.push(pin);
-            }
-
-            //Add the pushpin to the map
-            map.entities.push(pin_kalamata);
-            map.entities.push(pin_coldcut);
-            map.entities.push(pin_vakakis);
-
-            Microsoft.Maps.Events.addHandler(pin_kalamata, 'click', pinClicked);
-            Microsoft.Maps.Events.addHandler(pin_coldcut, 'click', pinClicked);
-            Microsoft.Maps.Events.addHandler(pin_vakakis, 'click', pinClicked);
-        
-        }
-
-        function pinClicked(e) {
-            console.log(e.target.getLocation())
-            if (e.target.metadata) {
-                //Set the infobox options with the metadata of the pushpin.
-                infobox.setOptions({
-                    maxWidth :400, 
-                    maxHeight :400,
-                    offset: new Microsoft.Maps.Point(10,0), 
-                    location: e.target.getLocation(),
-                    title: e.target.metadata.title,
-                    description: e.target.metadata.description, 
-                    visible: true,
-                });
-            }
-        }
-        </script>
-        <script type='text/javascript' src='https://www.bing.com/api/maps/mapcontrol?callback=GetMap&key=AtKaux2oKNpLTtOuIb1poYNs1_kIoGAS9s7-QCLybGSuB8gax8zDd8RxjV4UFyu0' async defer></script>
-        <script type='text/javascript' src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js"></script>
 </head>
 <body>
-    <div class="container">
-        <nav class="navbar bg-primary text-white rounded">
-            <div class="container-fluid ml-3 pl-3 justify-content-center">
-              <span class="navbar-brand mb-0 h1">
-                <p class="title text-wrap">
-                    A Greek Journey of Wine & Cheese Tastings
-                </p>
-              </span>
+    <div class="container-fluid">
+        <nav class="navbar bg-body-tertiary xmas_header">
+            <div class="container-fluid">
+              <a class="navbar-brand xmas_message" href="#"> </a>
             </div>
-          </nav>
-
-        <div class="mt-1 p-1 bg-primary text-white rounded">
-        <div id="myMap" style="position:relative;width:100%;height:800px;"></div>
-        </div>
-        <div id="footer">
-            &copy; 2022 - ESC/NYC Coding Society
-        </div>
+        </nav>
+        <h1 class="xmas_message">I'm Dreaming of a Greek Christmas!</h1>
+        <div id="map" class="map"></div>
     </div>
+    
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+    integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
+    crossorigin=""></script>
+
+    <script>
+        // id, Name, Origin, image name, longitude, latitude
+        var markers = [
+            ['1', 'Gruyère', 'Crete', 'gruyere', 35.251, 24.431],
+            ['2', 'Smoked Agiotiri cheese', 'Chalkidiki', 'agiotiri', 40.39, 23.851],
+            ['3', 'Tomme De Savoie', 'Cheese from Greek cow milk with pepper & lemon flowers', 'tomme', 41.004, 22.836],
+            ['4', 'Cranberries', 'Epirus', 'cranberries', 40.138, 20.886],
+            ['5', 'Pistachios', 'Egina island', 'pistachios', 37.726, 23.483],
+            ['6', 'Dried figs', 'Evia', 'figs', 38.959, 23.159],
+            ['7', 'Crackers', 'Thessaly', 'crackers', 39.620, 22.316],
+            ['7', 'Breadsticks', 'Peloponnese', 'breadsticks', 37.498, 22.343],
+            ['8', 'Beef pastrami with peppers', 'Karditsa', 'pastrami', 39.360, 21.926],
+            ['9', 'Prosciutto Cotto', 'Epirus', 'prosciutto', 39.401, 20.771],
+            ['10', 'Salami with parmesan cheese', 'Lefkada', 'salami', 38.745, 20.671],
+            ['11', 'Rose Organic Semi Dry Wine', 'Limnos island', 'rose', 39.962, 25.065],
+            ['12', 'White Dry Organic Muscat Wine of Alexandria', 'Limnos island', 'white', 39.831, 25.31],
+            ['13', 'Sausage Pies', 'Aegean Islands', 'saussage-pie', 37.584, 25.133],
+            ['14', 'Cheese Pie (feta & mizithra)', 'Macedonia', 'cheese-pie', 40.662, 22.921],
+            ['15', 'Spinach Pie', 'Peloponnese', 'spinach-pie', 37.008, 22.701],
+            ['17', 'Aromatic Greek Seasonal Fruits', 'All over Greece', 'fruits', 38.692, 22.659],
+            ['18', 'Tsipouro', 'Crete', 'tsipouro', 35.166, 25.131],
+            ['19', 'Ouzo',  'Lesvos', 'ouzo', 39.056, 26.321],
+            ['20', 'Melomakarono<br>Traditional Greek Christmas treat', 'All over Greece', 'melomakarono', 38.357, 26.041], 
+            ['21', 'Kourabies<br>Traditional Greek Christmas treat', 'All over Greece', 'kourabies', 40.968, 24.496],
+            ['22', 'Kaltsouni<br>(stuffed with anthotiro)', 'Crete', 'kaltsouni', 35.148, 25.944]
+        ]
+
+        var photoImg = '<img src="xmas-header.jpg" height="100px" width="100px"/>';
+        
+
+        var map = L.map('map').setView([38.37, 23.167], 7);
+        L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
+            attribution: 'Tiles &copy; Esri &mdash; Source: Esri, i-cubed, USDA, USGS, AEX, GeoEye, Getmapping, Aerogrid, IGN, IGP, UPR-EGP, and the GIS User Community'
+        }).addTo(map);
+
+        for(let i = 0; i < markers.length; i++) {
+            let item = markers[i]
+            var marker = new L.Marker([item[4], item[5]]);
+            marker.bindTooltip(item[0], {permanent: true});
+            marker.bindPopup(item[0] + ". " + item[1] + "<br>(" + item[2] + ")<br>" +  
+                        "<img src='" + item[3] + ".jpg' height='150px' width='150px'/>").openPopup();
+            marker.addTo(map);
+        }
+        
+        
+       
+    </script>
 </body>
 </html>
